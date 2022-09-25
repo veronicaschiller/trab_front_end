@@ -1,0 +1,16 @@
+#navbar{
+    background-color: #5F82F5;
+}
+.logo{
+width: clamp(100px, 20vw, 200px)
+}
+
+#btnInsulina{
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+}
+#Gli, #Nph, #Comp, #Rap {
+    border-radius: 10px;
+    border-color: #5F82F5;
+}

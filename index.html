@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+    <link rel="shortcut icon" href="/Assets/LogoDiabet.svg" type="image/x-icon" />
+    <title>DIABET</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg" id="navbar">
+        <div class="container py-2">
+            <a class="navbar-brand ms-3 align-middle" href="#">
+                <img class="logo" src="/Assets/LogoDiabet.svg" alt="Logo App Diabet" />
+            </a>
+            <button class="btn btn-light position-relative" type="button" id="btnInsulina">
+                <i class="bi-clipboard-plus-fill fs-3 align-middle"></i>
+                <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark fw-bold">
+                    0
+                    <span class="visually-hidden">Informações</span>
+                </span>
+            </button>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="mt-4 fw-bold ">Suas Doses</h1>
+        <div class="Doses">
+            <form>
+                <div class="row g-2">
+                    <div class="col-6 my-2">
+                        <label for="GlicoseDoMomento" class="form-label">Adicione a glicose</label>
+                        <input type="number" name="GlicoseDoMomento" placeholder="Digite um número" id="Gli" class="me-4">
+                    </div>
+                    <div class="col-6 my-2">   
+                        <label for="Nph" class="form-label me-3">Nph</label>
+                        <input type="number" name="Nph" placeholder="Digite um número" id="Nph" class=>
+                    </div>
+                    <div class="col-6 my-2">
+                        <label for="Complmento" class="form-label me-4">Complemento</label>
+                        <input type="number" name="Complemento" placeholder="Digite um número" id="Comp" class="me-4">
+                    </div>
+                    <div class="col-6 my-2">
+                        <label for="Rapida" class="form-label">Rapida</label>
+                        <input type="number" name="Rapida" placeholder="Digite um número" id="Rap">
+                    </div>
+                    <div class=".col-6 my-2">
+                        <button type="submit" class="btn bg-info text-white fw-bold rounded-2" id="btnAdicionar">Adicionar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="mt-4 fw-bold">Histórico</h1>
+        <div class="row Historico"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
