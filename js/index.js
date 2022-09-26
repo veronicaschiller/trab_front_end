@@ -1,6 +1,9 @@
+
 const DivHistorico = document.querySelector(".Historico")
 const spanBadge = document.querySelector("span.position-absolute ")
 const btAdicionar = document.querySelector("#btnAdicionar")
+const btnExcluir = document.querySelector("#btnExcluir")
+const id = document.querySelector("#id")
 const glicMomento = document.querySelector("#Gli")
 const nph = document.querySelector("#Nph")
 const complemento = document.querySelector("#Comp")
@@ -10,58 +13,64 @@ let insulinasSalvas
 let insulinas
 
 const carregaInsulina = async () => {
-const dados = await axios.get("http://localhost:3000/insulina")
- insulinas = dados.data
+  const dados = await axios.get("http://localhost:3000/insulina")
+  insulinas = dados.data
 
- let resposta =  ""
- for (const insulina of insulinas) {
+  let resposta = ""
+  for (const insulina of insulinas) {
     resposta += `
-    <div class="col-6 col-sm-4 col-md-3 mx-auto">
+    <div class="col-6 col-sm-4 col-md-3 mx-auto ">
     <div class="card" style="width: 18rem; height: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title fw-bold fs-3"> Dose ${insulina.id + 1}</h5>
+      <div class="card-body rounded-3">
+        <h5 class="card-title fw-bold fs-3" id="id"> Dose ${insulina.id + 1}</h5>
         <p class="card-text fw-bold">Momento: ${insulina.Glicose_momento}</p>
         <p class="card-text fw-bold">NPh: ${insulina.Nph}</p>
         <p class="card-text fw-bold">Complemento: ${insulina.complemento}</p>
         <p class="card-text fw-bold">Rápida: ${insulina.Rapida}</p>
       </div>
+      <div class=".col-3 my-1 mx-auto">
+          <button type="submit" class="btn bg-danger text-white fw-bold rounded-2" id="btnExcluir" >Excluir</button>
+          </div>
     </div>    
   </div>  
   `
- }
- DivHistorico.innerHTML = resposta
+  }
+  DivHistorico.innerHTML = resposta
 
- insulinasSalvas = localStorage.getItem("insulina") ? localStorage.getItem("insulina").split(";") :
- []
-spanBadge.innerHTML= insulinasSalvas.length
+  insulinasSalvas = localStorage.getItem("insulina") ? localStorage.getItem("insulina").split(";") :
+    []
+  spanBadge.innerHTML = insulinasSalvas.length
 }
 
 window.addEventListener("load", carregaInsulina)
 
 DivHistorico.addEventListener("click", e => {
-  if(e.target.classList("btAdicionar")){
+  if (e.target.classList("btAdicionar")) {
     const div = e.target.parentElement
-  const tagH5 = div.querySelector("button")
-  const idNome = tagH5.innerText
-  
-  const partes = idNome.split("-")
+    const tagH5 = div.querySelector("button")
+    const idNome = tagH5.innerText
 
-  const id = partes[0]
+    const partes = idNome.split("-")
 
-  insulinasSalvas.push(id)
- spanBadge.innerText = insulinasSalvas.length
- 
- localStorage.setItem("insulina", insulinasSalvas.join(";"))
+    const id = partes[0]
+
+    insulinasSalvas.push(id)
+    spanBadge.innerText = insulinasSalvas.length
+
+    localStorage.setItem("insulina", insulinasSalvas.join(";"))
   }
 })
-btAdicionar.addEventListener("click", (e) =>{
+btAdicionar.addEventListener("click", (e) => {
   e.preventDefault()
-  axios.post("http://localhost:3000/insulina",{
-  Glicose_momento: glicMomento.value,
-  Nph: nph.value,
-  complemento: complemento.value,
-  Rapida: rapida.value
+  axios.post("http://localhost:3000/insulina", {
+    Glicose_momento: glicMomento.value,
+    Nph: nph.value,
+    complemento: complemento.value,
+    Rapida: rapida.value
+  })
+  carregaInsulina()
+  localStorage.setItem("insulina", insulinas.join(";"))
 })
-carregaInsulina()
-localStorage.setItem(btAdicionar)
+btnExcluir.addEventListener("click",(id) =>{
+  axios.delete(`http://localhost:3000/insulina${id}`)
 })
