@@ -71,6 +71,9 @@ btAdicionar.addEventListener("click", (e) => {
   carregaInsulina()
   localStorage.setItem("insulina", insulinas.join(";"))
 })
-btnExcluir.addEventListener("click",(id) =>{
-  axios.delete(`http://localhost:3000/insulina${id}`)
+btnExcluir.addEventListener("click",(e) =>{
+if(e.target.classList.contains("delete")){
+  e.target.parentElement.remove()
+  axios.delete(`http://localhost:3000/insulina/${id}`)
+}
 })
